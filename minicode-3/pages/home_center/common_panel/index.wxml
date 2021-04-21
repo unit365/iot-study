@@ -1,0 +1,49 @@
+<!--miniprogram/pages/home_center/common_panel/index.js.wxml-->
+<wxs src="./index.wxs" module="utils" />
+
+<image class="common-panel-backgroud" src="{{forest}}" />
+<navbar device_name="{{device_name}}" bind:jumpTodeviceEditPage="jumpTodeviceEditPage" />
+
+<view class="common-panel-header">
+  <view class="common-panel-header-block">
+    <view class="common-panel-header-dpName">{{titleItem.name}}</view>
+    <view class="common-panel-header-dpValue" style="width: 421rpx; height: 203rpx; display: block; box-sizing: border-box; left: NaNrpx; top: NaNrpx">{{titleItem.value}}</view>
+  </view>
+</view>
+
+<block wx:if="{{isRoDpListShow}}">
+  <view class="statuslist">
+    <block wx:for="{{roDpList}}" wx:key="{{item.code}}" wx:for-item="item" wx:for-index='idx'>
+      <view class="{{utils.countDpItem(roDpListLength,idx)}}">
+        <view class="roDpItem-dpName">{{item.code}}</view>
+        <view class="roDpItem-status">{{item.value}}</view>
+      </view>
+    </block>
+  </view>
+</block>
+
+<view class="scroll-view">
+  <block wx:if="{{isRwDpListShow}}">
+    <block wx:for="{{rwDpList}}" wx:key="{{item.code}}" wx:for-item="item">
+      <block wx:if="{{item.type === 'Boolean'}}">
+        <Boolean model:isChecked="{{item.value}}" dpCode="{{item.code}}" dpName="{{item.name}}" bind:sendDp="sendDp" />
+      </block>
+      <block wx:if="{{item.type === 'Integer'}}">
+        <Integer model:value="{{item.value}}" values="{{item.values}}" dpCode="{{item.code}}" dpName="{{item.name}}"
+          bind:sendDp="sendDp" />
+      </block>
+      <block wx:if="{{item.type === 'Enum'}}">
+        <Enum model:value="{{item.value}}" values="{{item.values}}" dpCode="{{item.code}}" dpName="{{item.name}}"
+          bind:sendDp="sendDp" />
+      </block>
+    </block>
+  </block>
+</view>
+<button
+  style="position: relative; left: 138rpx; top: 97rpx; width: 334rpx; height: 205rpx; display: block; box-sizing: border-box">今日
+  <text style="position:relative;">电量统计</text>
+
+  
+</button>
+<image style="position: relative; left: 93rpx; top: -22rpx; width: 194rpx; height: 164rpx; display: block; box-sizing: border-box" src="https://mmbiz.qpic.cn/mmbiz_png/icTdbqWNOwNQ0ia79enzYJBsZ3CIkLQGe39qeOxbpT9oM9KaCthzBa0PF75xzBGjZQGlM69TDggxpNX7ACibCjjtw/0?wx_fmt=png&t=1614824466" />
+
